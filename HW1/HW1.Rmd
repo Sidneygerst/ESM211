@@ -4,15 +4,87 @@ author: "Sidney Gerst"
 date: "January 17, 2020"
 output: html_document
 ---
+<style type="text/css">
+
+h1.title {
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+h4.author {
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  font-size: 26px;
+}
+h4.date {
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+}
+
+body {
+font-family: "Times New Roman", Times, serif;
+font-size: 20px;
+}
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
 ```
 
 
-1. Three reasons why plants or animals might be patchily distributed:
-    + Reason 1
-    + Reason 2
-    + Reason 3
+  1. Three reasons why plants or animals might be patchily distributed:
+       + Reason 1
+       + Reason 2
+       + Reason 3
 
+###**Eureka Dune Grass**
+
+  2. 
+```{r message = F }
+
+#Read in Swallenia Data
+swallenia <- read_csv("Swallenia.csv")
+
+#Perform two sample t-test
+swallenia_ttest <- t.test(swallenia$count_2009, swallenia$count_2010, var.equal = TRUE)
+
+swallenia_ttest
+
+
+```
+
+Based on an $\alpha$ = 0.05 the difference in mean abundance of swallenia does not have a significant change between 2009 and 2010 (p = `r round(swallenia_ttest$p.value, 2)`). This alpha is appropriate because it is a 5% risk of concluding a difference exists when there is no actual difference. 
+
+  3. 
+```{r message = F}
+
+#Paired t-test
+swallenia_pairedtest <- t.test(swallenia$count_2009, swallenia$count_2010, paired = TRUE)
+
+swallenia_pairedtest
+
+```
+
+The true difference in means of abundance of swallenia between 2009 and 2010 does not equal to 0, so there is a difference in abundance (p = `r round(swallenia_pairedtest$p.value, 2)`). 
+
+  4. 
+
+The first analysis is more correct because (LOOK UP DEFINITION OF PAIRED TEST)
+
+  5. 
+
+Paragraph about why
+
+###**Yellowstone Grizzly Bears**
+  
+  6. 
+```{r message = F}
+
+grizzly <- read_csv("grizzlydata.csv")
+
+
+
+
+```
 

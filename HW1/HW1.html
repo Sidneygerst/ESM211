@@ -129,6 +129,27 @@ $(document).ready(function () {
 </div>
 
 
+<style type="text/css">
+
+h1.title {
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+}
+h4.author {
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  font-size: 26px;
+}
+h4.date {
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+}
+
+body {
+font-family: "Times New Roman", Times, serif;
+font-size: 20px;
+}
+</style>
 <ol style="list-style-type: decimal">
 <li>Three reasons why plants or animals might be patchily distributed:
 <ul>
@@ -137,6 +158,65 @@ $(document).ready(function () {
 <li>Reason 3</li>
 </ul></li>
 </ol>
+<div id="eureka-dune-grass" class="section level3">
+<h3><strong>Eureka Dune Grass</strong></h3>
+<ol start="2" style="list-style-type: decimal">
+<li></li>
+</ol>
+<pre class="r"><code>#Read in Swallenia Data
+swallenia &lt;- read_csv(&quot;Swallenia.csv&quot;)
+
+#Perform two sample t-test
+swallenia_ttest &lt;- t.test(swallenia$count_2009, swallenia$count_2010, var.equal = TRUE)
+
+swallenia_ttest</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  swallenia$count_2009 and swallenia$count_2010
+## t = -0.81791, df = 20, p-value = 0.423
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -140.07803   61.16893
+## sample estimates:
+## mean of x mean of y 
+##  61.90909 101.36364</code></pre>
+<p>Based on an <span class="math inline">\(\alpha\)</span> = 0.05 the difference in mean abundance of swallenia does not have a significant change between 2009 and 2010 (p = 0.42). This alpha is appropriate because it is a 5% risk of concluding a difference exists when there is no actual difference.</p>
+<ol start="3" style="list-style-type: decimal">
+<li></li>
+</ol>
+<pre class="r"><code>#Paired t-test
+swallenia_pairedtest &lt;- t.test(swallenia$count_2009, swallenia$count_2010, paired = TRUE)
+
+swallenia_pairedtest</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  swallenia$count_2009 and swallenia$count_2010
+## t = -2.4508, df = 10, p-value = 0.03421
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -75.324830  -3.584261
+## sample estimates:
+## mean of the differences 
+##               -39.45455</code></pre>
+<p>The true difference in means of abundance of swallenia between 2009 and 2010 does not equal to 0, so there is a difference in abundance (p = 0.03).</p>
+<ol start="4" style="list-style-type: decimal">
+<li></li>
+</ol>
+<p>The first analysis is more correct because (LOOK UP DEFINITION OF PAIRED TEST)</p>
+<ol start="5" style="list-style-type: decimal">
+<li></li>
+</ol>
+<p>Paragraph about why</p>
+</div>
+<div id="yellowstone-grizzly-bears" class="section level3">
+<h3><strong>Yellowstone Grizzly Bears</strong></h3>
+<ol start="6" style="list-style-type: decimal">
+<li></li>
+</ol>
+<pre class="r"><code>grizzly &lt;- read_csv(&quot;grizzlydata.csv&quot;)</code></pre>
+</div>
 
 
 
