@@ -1,0 +1,18 @@
+---
+title: "Homework 1"
+author: "Sidney Gerst"
+date: "January 17, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+1. Three reasons why plants or animals might be patchily distributed:
+ + Reason 1
+ + Reason 2
+ + Reason 3
+
+
