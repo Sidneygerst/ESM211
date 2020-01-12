@@ -11,8 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 1. Three reasons why plants or animals might be patchily distributed:
- + Reason 1
- + Reason 2
- + Reason 3
+    + Reason 1
+    + Reason 2
+    + Reason 3
 
 
