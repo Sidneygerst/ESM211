@@ -22,7 +22,7 @@ h4.date {
 
 body {
 font-family: "Times New Roman", Times, serif;
-font-size: 20px;
+font-size: 16px;
 }
 </style>
 
@@ -34,11 +34,11 @@ library(tidyverse)
 
 
   1. Three reasons why plants or animals might be patchily distributed:
-       + Reason 1
-       + Reason 2
-       + Reason 3
+       + Plants don't have the ability to move away. They may drop seeds that fall directly by where they live forcing themselves to be clumped or patchy. 
+       + Animals tend to live with their own species for protection such a herd of american bison. 
+       + Suitable habitat is essential for an ecosystem. Nutrient concentration may be a factor for plants where patched soil concentrations effect where the plants grow. Animals will follow that pattern as grazers will feast on the plant patches and carnivores will stay close to their prey. 
 
-###**Eureka Dune Grass**
+**Eureka Dune Grass**
 
   2. 
 ```{r message = F }
@@ -62,7 +62,7 @@ Based on an $\alpha$ = 0.05 the difference in mean abundance of swallenia does n
 #Paired t-test
 swallenia_pairedtest <- t.test(swallenia$count_2009, swallenia$count_2010, paired = TRUE)
 
-swallenia_pairedtest
+swallenia_pairedtest 
 
 ```
 
@@ -70,21 +70,40 @@ The true difference in means of abundance of swallenia between 2009 and 2010 doe
 
   4. 
 
-The first analysis is more correct because (LOOK UP DEFINITION OF PAIRED TEST)
+The second analysis with the paired t-test is more accurate than a two sample t-test because each plot is not independent of eachother between the two years.  
 
   5. 
 
-Paragraph about why
 
-###**Yellowstone Grizzly Bears**
+
+**Yellowstone Grizzly Bears**
   
   6. 
 ```{r message = F}
 
-grizzly <- read_csv("grizzlydata.csv")
+grizzly <- read_csv("grizzlydata.csv") 
+
+#Filter years 1959 to 1968
+grizzly5968 <- grizzly %>%
+  filter(Year >= "1959" & Year <= "1968")
 
 
+#perform linear regression
+grizzly5968_model <- lm(N ~ Year, data = grizzly5968)
 
+grizzly5968_model
+# N(grizzlies) = 1543 - 0.7636(Year)
+
+#Visualize the data
+girzzly5968_plot <- ggplot(grizzly5968, aes(x = Year, y = N)) +
+  geom_point() +
+  geom_smooth(method = lm, se = T, size = 0.5)+
+  theme_bw() +
+  scale_x_continuous(expand = c(0,0), limits = c(1958, 1970)) +
+  labs(x = "Year", y = "Number of Grizzlies")
+
+
+girzzly5968_plot
 
 ```
 
