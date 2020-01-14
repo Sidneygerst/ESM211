@@ -100,7 +100,7 @@ girzzly5968_plot <- ggplot(grizzly5968, aes(x = Year, y = N)) +
   geom_point() +
   geom_smooth(method = lm, se = T, size = 0.5)+
   theme_bw() +
-  scale_x_continuous(expand = c(0,0), limits = c(1958, 1970)) +
+  scale_x_continuous(expand = c(0,0), limits = c(1958, 1969)) +
   labs(x = "Year", y = "Number of Grizzlies")
 
 
@@ -109,3 +109,65 @@ girzzly5968_plot
 ```
 
 Based on a linear regression, the population of grizzly bears decreases 0.7636 bears per year between the years 1959 and 1968. 
+
+  7. 
+```{r}
+
+#filter years 1969 to 1978
+grizzly6978 <- grizzly %>%
+  filter(Year >= "1969" & Year <= "1978" )
+
+#perform linear regression 
+grizzly6978_model <- lm(N ~ Year, data = grizzly6978)
+
+grizzly6978_model
+#N(grizzlies) = 1532.3758 - 0.7576(Year)
+
+#visuallize data
+grizzly6978_plot <- ggplot(grizzly6978, aes(x = Year, y = N)) +
+  geom_point() +
+  geom_smooth(method = lm, se = T, size = 0.5)+
+  theme_bw() +
+  scale_x_continuous(expand = c(0,0), limits = c(1968, 1979)) +
+  labs(x = "Year", y = "Number of Grizzlies")
+
+
+grizzly6978_plot
+
+
+
+```
+
+Based on a linear regression, the population of grizzly bears decreases 0.7576 bears per year between the years 1969 and 1978. This is a slower decline than the previous ten years.  
+
+  8. 
+```{r}
+
+#filter the rest of the data
+grizzly79 <- grizzly %>%
+  filter(Year >= "1979")
+
+#perform linear regression
+grizzly79_model <- lm(N ~ Year, data = grizzly79)
+
+grizzly79_model
+# N(grizzly) = -6211.288 + 3.14(Years)
+
+#Visualize 
+grizzly79_plot <- ggplot(grizzly79, aes(x = Year, y = N)) +
+  geom_point() +
+  geom_smooth(method = lm, se = T, size = 0.5)+
+  theme_bw() +
+  scale_x_continuous(expand = c(0,0), limits = c(1978, 1998)) +
+  labs(x = "Year", y = "Number of Grizzlies")
+
+
+grizzly79_plot
+
+
+```
+
+The population size of grizzly from 1979 to 1997 increases 3.14 bears per year. The trend in population growth is positive. 
+
+  9. 
+Paragraph
