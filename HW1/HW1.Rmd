@@ -2,29 +2,11 @@
 title: "Homework 1"
 author: "Sidney Gerst"
 date: "January 17, 2020"
-output: html_document
+output: 
+  html_document:
+    theme: cosmo
 ---
-<style type="text/css">
 
-h1.title {
-  text-align: center;
-  font-family: "Times New Roman", Times, serif;
-}
-h4.author {
-  font-family: "Times New Roman", Times, serif;
-  text-align: center;
-  font-size: 26px;
-}
-h4.date {
-  font-family: "Times New Roman", Times, serif;
-  text-align: center;
-}
-
-body {
-font-family: "Times New Roman", Times, serif;
-font-size: 16px;
-}
-</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -75,7 +57,7 @@ The second analysis with the paired t-test is more accurate than a two sample t-
 
   5. 
 
-
+Conservation and continuous monitoring efforts should be focused on swallenia dune grass species. Between the years 2009 and 2010 there was a change in dune grass population. Through a Paired t-test calculation, a p-value of `r round(swallenia_pairedtest$p.value, 2)` was found. This means that there is a 3% chance of not finding a difference in the means, low enough to assume there is a difference. More years with data would be effective to show how trends in growth will change.       
 
 **Yellowstone Grizzly Bears**
   
@@ -171,4 +153,4 @@ The population size of grizzly from 1979 to 1997 increases 3.14 bears per year. 
 
   9. 
   
-Paragraph
+Starting in the year 1979, the trend in grizzly bear population switches from decreasing to increasing. The only the females with cubs are counted in this analysis, so it is safe to say that opening the dump has a positive effect on the female bear population. 
