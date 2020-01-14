@@ -30,13 +30,14 @@ font-size: 16px;
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
+
 ```
 
 
   1. Three reasons why plants or animals might be patchily distributed:
-       + Plants don't have the ability to move away. They may drop seeds that fall directly by where they live forcing themselves to be clumped or patchy. 
-       + Animals tend to live with their own species for protection such a herd of american bison. 
-       + Suitable habitat is essential for an ecosystem. Nutrient concentration may be a factor for plants where patched soil concentrations effect where the plants grow. Animals will follow that pattern as grazers will feast on the plant patches and carnivores will stay close to their prey. 
+       + Plants don't have the ability to move away. They may drop seeds that fall directly by where they live forcing themselves to be clumped or patchy. Because they stay in one place, patches will not vary year to year.   
+       + Animals tend to live with their own species for protection such a herd of american bison. Herds of animals, while they will stay together, will not stay in one are, so patches will vary year to year. 
+       + Suitable habitat is essential for an ecosystem. Nutrient concentration may be a factor for plants where patched soil concentrations effect where the plants grow. Animals will follow that pattern as grazers will feast on the plant patches and carnivores will stay close to their prey. Patches may vary year to year. 
 
 **Eureka Dune Grass**
 
@@ -107,3 +108,4 @@ girzzly5968_plot
 
 ```
 
+Based on a linear regression, the population of grizzly bears decreases 0.7636 bears per year between the years 1959 and 1968. 
