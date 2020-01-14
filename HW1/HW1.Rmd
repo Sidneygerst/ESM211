@@ -170,4 +170,5 @@ grizzly79_plot
 The population size of grizzly from 1979 to 1997 increases 3.14 bears per year. The trend in population growth is positive. 
 
   9. 
+  
 Paragraph
