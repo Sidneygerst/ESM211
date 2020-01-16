@@ -74,8 +74,13 @@ grizzly5968 <- grizzly %>%
 #perform linear regression
 grizzly5968_model <- lm(N ~ Year, data = grizzly5968)
 
+
 grizzly5968_model
 # N(grizzlies) = 1543 - 0.7636(Year)
+
+#summary function
+summary(grizzly5968_model)
+#standard error: 2.188,  p-value: 0.01319
 
 #Visualize the data
 girzzly5968_plot <- ggplot(grizzly5968, aes(x = Year, y = N)) +
@@ -102,6 +107,8 @@ grizzly6978 <- grizzly %>%
 #perform linear regression 
 grizzly6978_model <- lm(N ~ Year, data = grizzly6978)
 
+#summary function: standard error, p-value, etc
+
 grizzly6978_model
 #N(grizzlies) = 1532.3758 - 0.7576(Year)
 
@@ -115,6 +122,8 @@ grizzly6978_plot <- ggplot(grizzly6978, aes(x = Year, y = N)) +
 
 
 grizzly6978_plot
+
+#t test (pnorm) of the two models
 
 
 
