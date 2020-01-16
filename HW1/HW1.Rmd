@@ -79,7 +79,8 @@ grizzly5968_model
 # N(grizzlies) = 1543 - 0.7636(Year)
 
 #summary function
-summary(grizzly5968_model)
+griz59_sum <- summary(grizzly5968_model)
+griz59_sum
 #standard error: 2.188,  p-value: 0.01319
 
 #Visualize the data
@@ -95,7 +96,7 @@ girzzly5968_plot
 
 ```
 
-Based on a linear regression, the population of grizzly bears decreases 0.7636 bears per year between the years 1959 and 1968. 
+Based on a linear regression, the population of grizzly bears decreases 0.7636 bears per year between the years 1959 and 1968. This model has significant evidence that there is predictability (S = 2.188, p = 0.013). 
 
   7. 
 ```{r}
@@ -107,10 +108,13 @@ grizzly6978 <- grizzly %>%
 #perform linear regression 
 grizzly6978_model <- lm(N ~ Year, data = grizzly6978)
 
-#summary function: standard error, p-value, etc
-
 grizzly6978_model
 #N(grizzlies) = 1532.3758 - 0.7576(Year)
+
+#summary statistics
+griz69_sum <- summary(grizzly6978_model)
+griz69_sum
+#S = 2.469, p = 0.023
 
 #visuallize data
 grizzly6978_plot <- ggplot(grizzly6978, aes(x = Year, y = N)) +
@@ -123,13 +127,14 @@ grizzly6978_plot <- ggplot(grizzly6978, aes(x = Year, y = N)) +
 
 grizzly6978_plot
 
-#t test (pnorm) of the two models
+#comparing the two models: ttest on the slopes
+grizzly_ttest <- t.test()
 
 
 
 ```
 
-Based on a linear regression, the population of grizzly bears decreases 0.7576 bears per year between the years 1969 and 1978. This is a slower decline than the previous ten years.  
+Based on a linear regression, the population of grizzly bears decreases 0.7576 bears per year between the years 1969 and 1978. This model has significant evidence that there is predictability (S = 2.469, p = 0.023). This is a slower decline than the previous ten years.  
 
   8. 
 ```{r}
@@ -143,6 +148,10 @@ grizzly79_model <- lm(N ~ Year, data = grizzly79)
 
 grizzly79_model
 # N(grizzly) = -6211.288 + 3.14(Years)
+
+#summary statistics
+griz79_sum <- summary(grizzly79_model)
+griz79_sum
 
 #Visualize 
 grizzly79_plot <- ggplot(grizzly79, aes(x = Year, y = N)) +
@@ -158,8 +167,8 @@ grizzly79_plot
 
 ```
 
-The population size of grizzly from 1979 to 1997 increases 3.14 bears per year. The trend in population growth is positive. 
+The trend in the population continued to change, but in the other direction from the previous two decades. The population size of grizzlies from 1979 to 1997 increases 3.14 bears per year. The trend in population growth is positive. This model has significant evidence that there is predictability (S = 7.817, p < 0.001).
 
   9. 
   
-Starting in the year 1979, the trend in grizzly bear population switches from decreasing to increasing. The only the females with cubs are counted in this analysis, so it is safe to say that opening the dump has a positive effect on the female bear population. 
+Starting in the year 1979, the trend in grizzly bear population switches from decreasing to increasing. The only the females with cubs are counted in this analysis, so it is safe to say that keeping the dump closed has a positive effect on the female bear population. 
