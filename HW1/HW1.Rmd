@@ -2,7 +2,9 @@
 title: "Homework 1"
 author: "Sidney Gerst"
 date: "January 17, 2020"
-output: 
+output:
+  word_document: default
+  pdf_document: default
   html_document:
     theme: cosmo
 ---
@@ -128,13 +130,14 @@ grizzly6978_plot <- ggplot(grizzly6978, aes(x = Year, y = N)) +
 grizzly6978_plot
 
 #comparing the two models: ttest on the slopes
-grizzly_ttest <- t.test()
+grizzly_ttest <- t.test(grizzly5968$N, grizzly6978$N, var.equal = T)
+grizzly_ttest
 
 
 
 ```
 
-Based on a linear regression, the population of grizzly bears decreases 0.7576 bears per year between the years 1969 and 1978. This model has significant evidence that there is predictability (S = 2.469, p = 0.023). This is a slower decline than the previous ten years.  
+Based on a linear regression, the population of grizzly bears decreases 0.7576 bears per year between the years 1969 and 1978. This model has significant evidence that there is predictability (S = 2.469, p = 0.023). This is a significantly slower decline than the previous ten years (p = 0.0003).   
 
   8. 
 ```{r}
@@ -171,4 +174,4 @@ The trend in the population continued to change, but in the other direction from
 
   9. 
   
-Starting in the year 1979, the trend in grizzly bear population switches from decreasing to increasing. The only the females with cubs are counted in this analysis, so it is safe to say that keeping the dump closed has a positive effect on the female bear population. 
+During the 1960's there was a decline in the population of female grizzly bears. Starting in 1969, the decline started to slow down, where the population of grizzlies did not decline as quickly as they did the decade before. The dump was taken out of the park in 1968. Starting in the year 1979, the trend in grizzly bear population switches from decreasing to increasing. The only the females with cubs are counted in this analysis, so it is safe to say that keeping the dump within the park closed has a positive effect on the female bear population. 
