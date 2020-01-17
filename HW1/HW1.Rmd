@@ -135,6 +135,7 @@ grizzly_ttest
 
 
 
+
 ```
 
 Based on a linear regression, the population of grizzly bears decreases 0.7576 bears per year between the years 1969 and 1978. This model has significant evidence that there is predictability (S = 2.469, p = 0.023). This is a significantly slower decline than the previous ten years (p = 0.0003).   
