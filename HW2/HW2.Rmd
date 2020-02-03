@@ -53,6 +53,10 @@ When N = 0, the equation becomes: $\frac{df(N)}{dN} = r-P*a$
 
 Then we solve for P: $P = \frac{r}{a}$ . Hunters = the growth rate per prey attack rate. P needs to be greather than this number
 
+where is P stable, when it's larger than r/a or less than
+
+need a number of hunters that's larger than what? 
+
 
 ####4. Non-zero equilibria
 
@@ -150,7 +154,7 @@ There is only one equilibrium at N = 0 and it is stable.
 
 A. 
 
-
+domain goes to anything over 400
 
 B. 
 
@@ -160,3 +164,7 @@ C.
 
 probs something greater than where the blue line is at N = 2000
 
+
+#### 8. Derivitives 
+
+make a vertical line at the value of p where the value goes from unstable to stable. 
