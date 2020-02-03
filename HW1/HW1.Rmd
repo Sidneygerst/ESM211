@@ -79,7 +79,7 @@ grizzly5968_model
 # N(grizzlies) = 1543 - 0.7636(Year)
 
 #summary function
-summary(grizzly5968_model)
+griz59_sum <- summary(grizzly5968_model)
 #standard error: 2.188,  p-value: 0.01319
 
 #Visualize the data
@@ -95,7 +95,7 @@ girzzly5968_plot
 
 ```
 
-Based on a linear regression, the population of grizzly bears decreases 0.7636 bears per year between the years 1959 and 1968. 
+Based on a linear regression, the population of grizzly bears decreases 0.7636 bears per year between the years 1959 and 1968. This model does have a significant change in abundance (p = `r round(griz59_sum$p.value, 2)`) with 95% of the observations falling between 
 
   7. 
 ```{r}
