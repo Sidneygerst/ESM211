@@ -1,0 +1,162 @@
+---
+title: "Homework 2"
+author: "Sidney Gerst"
+date: "January 27, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(Deriv)
+
+```
+
+####1. Analyze the Model
+
+```{r}
+
+#create the model
+r <- 0.05
+K <- 2000
+P <- 4
+a <- 0.05
+h <- 0.2
+function1 <- function(N) (r*N)*(1-(N/K))-((P*a*N)/(1+(a*h*N)))
+
+#plot it
+function1_plot <- ggplot(data.frame(N = 0:2000), aes(x = N)) +
+  stat_function(fun = function1, color = "red") +
+  geom_hline(yintercept = 0) +
+  theme_bw()+
+  ylab("dN/dt")
+
+function1_plot
+
+
+```
+
+#### 2. How many equilibria? 
+
+There are three equilibira in this model (0,0), (375,0), and (1500,0). The points (0,0) and (1500,0) are stable and the point (375,0) is unstable. 
+
+#### 3. 
+
+When N = 0, the intrinsic population growth rate $\frac{dN}{dt}$ = 0, and is a equililbium. 
+
+To evaluate N at equilibium, the derivative should be calculated: 
+
+$\frac{df(N)}{dN} = r(1-\frac{2N}{K}) - P(\frac{a}{(1 + ahN)^2})$ 
+
+When N = 0, the equation becomes: $\frac{df(N)}{dN} = r-P*a$
+
+Then we solve for P: $P = \frac{r}{a}$ . Hunters = the growth rate per prey attack rate. P needs to be greather than this number
+
+
+####4. Non-zero equilibria
+
+Create an equation
+
+####5. Graph model
+
+A. 
+
+```{r}
+
+r <- 0.05
+K <- 2000
+P <- 4
+a <- 0.05
+h <- 0.2
+
+function2 <- function(N) (r*N)*(1-(N/K))
+function3 <- function(N) ((P*a*N)/(1+(a*h*N)))
+
+function2_plot <- ggplot(data.frame(N = 0:2000), aes(x = N)) +
+  stat_function(fun = function2, color = "red") +
+  stat_function(fun = function3, color = "blue") +
+  geom_hline(yintercept = 0) +
+  theme_bw()+
+  ylab("dN/dt")
+
+function2_plot
+
+
+
+```
+
+B. 
+
+When the intrinsic growth rate is greater than the hunting rate, the population will continue to grow. When the hunting rate is greater than the intrinsic growth rate, the population will go down to 0. When they are equal, the population will be at equilibrium. 
+
+C. 
+
+All three equilibrium points are at the same N values as in Problem 1. 
+
+####6. 
+
+```{r}
+########## P = 1
+r <- 0.05
+K <- 2000
+P <- 1
+a <- 0.05
+h <- 0.2
+
+function4 <- function(N) (r*N)*(1-(N/K))-((P*a*N)/(1+(a*h*N)))
+
+function3_plot <- ggplot(data.frame(N = 0:2000), aes(x = N)) +
+  stat_function(fun = function4, color = "red") +
+  geom_hline(yintercept = 0) +
+  theme_bw()+
+  ylab("dN/dt")
+
+function3_plot
+
+
+
+
+```
+
+There are two equilibria. An unstable equilibrium at N = 0, and a stable at N ~ 1900. 
+
+```{r}
+############ P = 6
+
+r <- 0.05
+K <- 2000
+P <- 6
+a <- 0.05
+h <- 0.2
+
+function5 <- function(N) (r*N)*(1-(N/K))-((P*a*N)/(1+(a*h*N)))
+
+function3_plot <- ggplot(data.frame(N = 0:2000), aes(x = N)) +
+  stat_function(fun = function4, color = "red") +
+  geom_hline(yintercept = 0) +
+  theme_bw()+
+  ylab("dN/dt")
+
+function3_plot
+
+
+
+```
+
+There is only one equilibrium at N = 0 and it is stable. 
+
+####7. Bistability
+
+A. 
+
+
+
+B. 
+
+The hunting rate is greater than the intrinsic growth rate, so you would be able to extirpate the invasive species.
+
+C. 
+
+probs something greater than where the blue line is at N = 2000
+

@@ -1,0 +1,552 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Homework 1},
+            pdfauthor={Sidney Gerst},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Homework 1}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Sidney Gerst}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{January 17, 2020}
+
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Three reasons why plants or animals might be patchily distributed:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Plants don't have the ability to move away. They may drop seeds that
+    fall directly by where they live forcing themselves to be clumped or
+    patchy. Because they stay in one place, patches will not vary year
+    to year.\\
+  \item
+    Animals tend to live with their own species for protection such a
+    herd of american bison. Herds of animals, while they will stay
+    together, will not stay in one are, so patches will vary year to
+    year.
+  \item
+    Suitable habitat is essential for an ecosystem. Nutrient
+    concentration may be a factor for plants where patched soil
+    concentrations effect where the plants grow. Animals will follow
+    that pattern as grazers will feast on the plant patches and
+    carnivores will stay close to their prey. Patches may vary year to
+    year.
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Eureka Dune Grass}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Read in Swallenia Data}
+\NormalTok{swallenia <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"Swallenia.csv"}\NormalTok{)}
+
+\CommentTok{#Perform two sample t-test}
+\NormalTok{swallenia_ttest <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(swallenia}\OperatorTok{$}\NormalTok{count_}\DecValTok{2009}\NormalTok{, swallenia}\OperatorTok{$}\NormalTok{count_}\DecValTok{2010}\NormalTok{, }\DataTypeTok{var.equal =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{swallenia_ttest}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Two Sample t-test
+## 
+## data:  swallenia$count_2009 and swallenia$count_2010
+## t = -0.81791, df = 20, p-value = 0.423
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -140.07803   61.16893
+## sample estimates:
+## mean of x mean of y 
+##  61.90909 101.36364
+\end{verbatim}
+
+Based on an \(\alpha\) = 0.05 the difference in mean abundance of
+swallenia does not have a significant change between 2009 and 2010 (p =
+0.42). This alpha is appropriate because it is a 5\% risk of concluding
+a difference exists when there is no actual difference.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Paired t-test}
+\NormalTok{swallenia_pairedtest <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(swallenia}\OperatorTok{$}\NormalTok{count_}\DecValTok{2009}\NormalTok{, swallenia}\OperatorTok{$}\NormalTok{count_}\DecValTok{2010}\NormalTok{, }\DataTypeTok{paired =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{swallenia_pairedtest }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Paired t-test
+## 
+## data:  swallenia$count_2009 and swallenia$count_2010
+## t = -2.4508, df = 10, p-value = 0.03421
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -75.324830  -3.584261
+## sample estimates:
+## mean of the differences 
+##               -39.45455
+\end{verbatim}
+
+The true difference in means of abundance of swallenia between 2009 and
+2010 does not equal to 0, so there is a difference in abundance (p =
+0.03).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+\end{enumerate}
+
+The second analysis with the paired t-test is more accurate than a two
+sample t-test because each plot is not independent of eachother between
+the two years.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\item
+\end{enumerate}
+
+Conservation and continuous monitoring efforts should be focused on
+swallenia dune grass species. Between the years 2009 and 2010 there was
+a change in dune grass population. Through a Paired t-test calculation,
+a p-value of 0.03 was found. This means that there is a 3\% chance of
+not finding a difference in the means, low enough to assume there is a
+difference. Continued monitoring and conservation of dune grass should
+take place. More years with data would be effective to show how trends
+in growth will change.
+
+\textbf{Yellowstone Grizzly Bears}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grizzly <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"grizzlydata.csv"}\NormalTok{) }
+
+\CommentTok{#Filter years 1959 to 1968}
+\NormalTok{grizzly5968 <-}\StringTok{ }\NormalTok{grizzly }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(Year }\OperatorTok{>=}\StringTok{ "1959"} \OperatorTok{&}\StringTok{ }\NormalTok{Year }\OperatorTok{<=}\StringTok{ "1968"}\NormalTok{)}
+
+
+\CommentTok{#perform linear regression}
+\NormalTok{grizzly5968_model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(N }\OperatorTok{~}\StringTok{ }\NormalTok{Year, }\DataTypeTok{data =}\NormalTok{ grizzly5968)}
+
+
+\NormalTok{grizzly5968_model}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly5968)
+## 
+## Coefficients:
+## (Intercept)         Year  
+##   1543.0000      -0.7636
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# N(grizzlies) = 1543 - 0.7636(Year)}
+
+\CommentTok{#summary function}
+\NormalTok{griz59_sum <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(grizzly5968_model)}
+\NormalTok{griz59_sum}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly5968)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.0364 -1.5591 -0.1273  1.5182  3.5455 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)  
+## (Intercept) 1543.0000   472.9413   3.263   0.0115 *
+## Year          -0.7636     0.2409  -3.170   0.0132 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.188 on 8 degrees of freedom
+## Multiple R-squared:  0.5568, Adjusted R-squared:  0.5014 
+## F-statistic: 10.05 on 1 and 8 DF,  p-value: 0.01319
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#standard error: 2.188,  p-value: 0.01319}
+
+\CommentTok{#Visualize the data}
+\NormalTok{girzzly5968_plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(grizzly5968, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Year, }\DataTypeTok{y =}\NormalTok{ N)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{se =}\NormalTok{ T, }\DataTypeTok{size =} \FloatTok{0.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_bw}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), }\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{1958}\NormalTok{, }\DecValTok{1969}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Year"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Number of Grizzlies"}\NormalTok{)}
+
+
+\NormalTok{girzzly5968_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW1_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+Based on a linear regression, the population of grizzly bears decreases
+0.7636 bears per year between the years 1959 and 1968. This model has
+significant evidence that there is predictability (S = 2.188, p =
+0.013).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#filter years 1969 to 1978}
+\NormalTok{grizzly6978 <-}\StringTok{ }\NormalTok{grizzly }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(Year }\OperatorTok{>=}\StringTok{ "1969"} \OperatorTok{&}\StringTok{ }\NormalTok{Year }\OperatorTok{<=}\StringTok{ "1978"}\NormalTok{ )}
+
+\CommentTok{#perform linear regression }
+\NormalTok{grizzly6978_model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(N }\OperatorTok{~}\StringTok{ }\NormalTok{Year, }\DataTypeTok{data =}\NormalTok{ grizzly6978)}
+
+\NormalTok{grizzly6978_model}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly6978)
+## 
+## Coefficients:
+## (Intercept)         Year  
+##   1532.3758      -0.7576
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#N(grizzlies) = 1532.3758 - 0.7576(Year)}
+
+\CommentTok{#summary statistics}
+\NormalTok{griz69_sum <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(grizzly6978_model)}
+\NormalTok{griz69_sum}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly6978)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.6788 -0.9439  0.2303  1.4955  3.5939 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)  
+## (Intercept) 1532.3758   536.3641   2.857   0.0213 *
+## Year          -0.7576     0.2718  -2.787   0.0237 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.469 on 8 degrees of freedom
+## Multiple R-squared:  0.4927, Adjusted R-squared:  0.4293 
+## F-statistic:  7.77 on 1 and 8 DF,  p-value: 0.02365
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#S = 2.469, p = 0.023}
+
+\CommentTok{#visuallize data}
+\NormalTok{grizzly6978_plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(grizzly6978, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Year, }\DataTypeTok{y =}\NormalTok{ N)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{se =}\NormalTok{ T, }\DataTypeTok{size =} \FloatTok{0.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_bw}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), }\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{1968}\NormalTok{, }\DecValTok{1979}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Year"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Number of Grizzlies"}\NormalTok{)}
+
+
+\NormalTok{grizzly6978_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW1_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#comparing the two models: ttest on the slopes}
+\NormalTok{grizzly_ttest <-}\StringTok{ }\KeywordTok{t.test}\NormalTok{(grizzly5968}\OperatorTok{$}\NormalTok{N, grizzly6978}\OperatorTok{$}\NormalTok{N, }\DataTypeTok{var.equal =}\NormalTok{ T)}
+\NormalTok{grizzly_ttest}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Two Sample t-test
+## 
+## data:  grizzly5968$N and grizzly6978$N
+## t = 4.4242, df = 18, p-value = 0.0003275
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  3.308286 9.291714
+## sample estimates:
+## mean of x mean of y 
+##      43.6      37.3
+\end{verbatim}
+
+Based on a linear regression, the population of grizzly bears decreases
+0.7576 bears per year between the years 1969 and 1978. This model has
+significant evidence that there is predictability (S = 2.469, p =
+0.023). This is a significantly slower decline than the previous ten
+years (p = 0.0003).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#filter the rest of the data}
+\NormalTok{grizzly79 <-}\StringTok{ }\NormalTok{grizzly }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(Year }\OperatorTok{>=}\StringTok{ "1979"}\NormalTok{)}
+
+\CommentTok{#perform linear regression}
+\NormalTok{grizzly79_model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(N }\OperatorTok{~}\StringTok{ }\NormalTok{Year, }\DataTypeTok{data =}\NormalTok{ grizzly79)}
+
+\NormalTok{grizzly79_model}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly79)
+## 
+## Coefficients:
+## (Intercept)         Year  
+##   -6211.288        3.154
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# N(grizzly) = -6211.288 + 3.14(Years)}
+
+\CommentTok{#summary statistics}
+\NormalTok{griz79_sum <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(grizzly79_model)}
+\NormalTok{griz79_sum}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly79)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -18.4035  -4.0140   0.2947   3.8316  14.1333 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -6211.2877   650.9227  -9.542 3.06e-08 ***
+## Year            3.1544     0.3274   9.634 2.67e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.817 on 17 degrees of freedom
+## Multiple R-squared:  0.8452, Adjusted R-squared:  0.8361 
+## F-statistic: 92.81 on 1 and 17 DF,  p-value: 2.667e-08
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Visualize }
+\NormalTok{grizzly79_plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(grizzly79, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Year, }\DataTypeTok{y =}\NormalTok{ N)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =}\NormalTok{ lm, }\DataTypeTok{se =}\NormalTok{ T, }\DataTypeTok{size =} \FloatTok{0.5}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_bw}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), }\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{1978}\NormalTok{, }\DecValTok{1998}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Year"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Number of Grizzlies"}\NormalTok{)}
+
+
+\NormalTok{grizzly79_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW1_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+The trend in the population continued to change, but in the other
+direction from the previous two decades. The population size of
+grizzlies from 1979 to 1997 increases 3.14 bears per year. The trend in
+population growth is positive. This model has significant evidence that
+there is predictability (S = 7.817, p \textless{} 0.001).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\item
+\end{enumerate}
+
+During the 1960's there was a decline in the population of female
+grizzly bears. Starting in 1969, the decline started to slow down, where
+the population of grizzlies did not decline as quickly as they did the
+decade before. The dump was taken out of the park in 1968. Starting in
+the year 1979, the trend in grizzly bear population switches from
+decreasing to increasing. The only the females with cubs are counted in
+this analysis, so it is safe to say that keeping the dump within the
+park closed has a positive effect on the female bear population.
+
+
+\end{document}
