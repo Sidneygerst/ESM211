@@ -9,7 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
-library(Deriv)
 
 ```
 
@@ -60,7 +59,7 @@ need a number of hunters that's larger than what?
 
 ####4. Non-zero equilibria
 
-Create an equation
+$0 = r*N*(1-\frac{N}{k})-P*(\frac{aN}{1 + ahN})$
 
 ####5. Graph model
 
@@ -108,10 +107,12 @@ P <- 1
 a <- 0.05
 h <- 0.2
 
-function4 <- function(N) (r*N)*(1-(N/K))-((P*a*N)/(1+(a*h*N)))
+function4 <- function(N) (r*N)*(1-(N/K))
+function5 <- function(N) ((P*a*N)/(1+(a*h*N)))
 
 function3_plot <- ggplot(data.frame(N = 0:2000), aes(x = N)) +
   stat_function(fun = function4, color = "red") +
+  stat_function(fun = function5, color = "blue") +
   geom_hline(yintercept = 0) +
   theme_bw()+
   ylab("dN/dt")
@@ -134,15 +135,17 @@ P <- 6
 a <- 0.05
 h <- 0.2
 
-function5 <- function(N) (r*N)*(1-(N/K))-((P*a*N)/(1+(a*h*N)))
+function6 <- function(N) (r*N)*(1-(N/K))
+function7 <- function(N) ((P*a*N)/(1+(a*h*N)))
 
-function3_plot <- ggplot(data.frame(N = 0:2000), aes(x = N)) +
-  stat_function(fun = function4, color = "red") +
+function4_plot <- ggplot(data.frame(N = 0:2000), aes(x = N)) +
+  stat_function(fun = function6, color = "red") +
+  stat_function(fun = function7, color = "blue") +
   geom_hline(yintercept = 0) +
   theme_bw()+
   ylab("dN/dt")
 
-function3_plot
+function4_plot
 
 
 
@@ -154,7 +157,7 @@ There is only one equilibrium at N = 0 and it is stable.
 
 A. 
 
-domain goes to anything over 400
+The domain of attraction for the zero equilibrium goes from 0 - 400. The domain of attraction for the largest equlibrium is any number greater than 400. 
 
 B. 
 
@@ -162,9 +165,39 @@ The hunting rate is greater than the intrinsic growth rate, so you would be able
 
 C. 
 
-probs something greater than where the blue line is at N = 2000
+When the population is at the carrying capacity and the harvest rate is greater, the population will come back to about 1500 individuals.  
 
 
 #### 8. Derivitives 
 
-make a vertical line at the value of p where the value goes from unstable to stable. 
+A. 
+
+```{r}
+
+r <- 0.05
+K <- 2000
+a <- 0.05
+h <- 0.2
+d <- 1/(a*h)
+
+function8 <- function(P) (1/2) * ((K - d) - sqrt((K-d)^2 + ((4*K*d)/(r)) * (r - a * P)))
+
+function9 <- function(P) (1/2) * ((K - d) + sqrt((K-d)^2 + ((4*K*d)/(r)) * (r - a * P))) 
+
+function_8_9_plot <-ggplot(data.frame(P = 0:7) , aes(x = P)) +
+stat_function(fun = function8, color = "red") + 
+  stat_function(fun = function9, color = "blue") +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 1, linetype = "dotted", color = "purple", size = 2) +
+  theme_bw() +
+  ylab("N")
+
+function_8_9_plot
+
+
+```
+
+B. make a vertical line at the value of p where the value goes from unstable to stable.
+
+The equilibium is unstable at P = 1. 
+
