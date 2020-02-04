@@ -12,7 +12,7 @@ library(tidyverse)
 
 ```
 
-####1. Analyze the Model
+#### 1. Analyze the Model
 
 ```{r}
 
@@ -40,7 +40,7 @@ function1_plot
 
 There are three equilibira in this model (0,0), (375,0), and (1500,0). The points (0,0) and (1500,0) are stable and the point (375,0) is unstable. 
 
-#### 3. 
+#### 3. Equilibrium at N = 0
 
 When N = 0, the intrinsic population growth rate $\frac{dN}{dt}$ = 0, and is a equililbium. 
 
@@ -50,18 +50,18 @@ $\frac{df(N)}{dN} = r(1-\frac{2N}{K}) - P(\frac{a}{(1 + ahN)^2})$
 
 When N = 0, the equation becomes: $\frac{df(N)}{dN} = r-P*a$
 
-Then we solve for P: $P = \frac{r}{a}$ . Hunters = the growth rate per prey attack rate. P needs to be greather than this number
+Then we solve for P: $P = \frac{r}{a}$ . Hunters = the growth rate per prey attack rate. P needs to be greather than this number.
 
-where is P stable, when it's larger than r/a or less than
+When P is larger than $\frac{r}{a}$, the equilibrium is locally stable. 
 
-need a number of hunters that's larger than what? 
+The number of hunters needs to be larger than the intrinsic growth rate over per prey attack rate (or the rate hunters are able to kill the species) in order to eliminate the invasive species. Or the hunters and their attack rate needs to be greater than the intrinsic growth rate. 
 
 
-####4. Non-zero equilibria
+#### 4. Non-zero equilibria
 
 $0 = r*N*(1-\frac{N}{k})-P*(\frac{aN}{1 + ahN})$
 
-####5. Graph model
+#### 5. Graph model
 
 A. 
 
@@ -97,7 +97,7 @@ C.
 
 All three equilibrium points are at the same N values as in Problem 1. 
 
-####6. 
+#### 6. Graphs of different hunting rates
 
 ```{r}
 ########## P = 1
@@ -153,7 +153,7 @@ function4_plot
 
 There is only one equilibrium at N = 0 and it is stable. 
 
-####7. Bistability
+#### 7. Bistability
 
 A. 
 
@@ -168,11 +168,11 @@ C.
 When the population is at the carrying capacity and the harvest rate is greater, the population will come back to about 1500 individuals.  
 
 
-#### 8. Derivitives 
+#### 8. Derivatives
 
 A. 
 
-```{r}
+```{r warning = F}
 
 r <- 0.05
 K <- 2000
@@ -185,8 +185,8 @@ function8 <- function(P) (1/2) * ((K - d) - sqrt((K-d)^2 + ((4*K*d)/(r)) * (r - 
 function9 <- function(P) (1/2) * ((K - d) + sqrt((K-d)^2 + ((4*K*d)/(r)) * (r - a * P))) 
 
 function_8_9_plot <-ggplot(data.frame(P = 0:7) , aes(x = P)) +
-stat_function(fun = function8, color = "red") + 
-  stat_function(fun = function9, color = "blue") +
+stat_function(fun = function8, color = "red", n = 10000) + 
+  stat_function(fun = function9, color = "blue", n = 10000) +
   geom_hline(yintercept = 0) +
   geom_vline(xintercept = 1, linetype = "dotted", color = "purple", size = 2) +
   theme_bw() +
@@ -197,7 +197,11 @@ function_8_9_plot
 
 ```
 
-B. make a vertical line at the value of p where the value goes from unstable to stable.
+B. 
 
-The equilibium is unstable at P = 1. 
+The equilibium is unstable at P = 1. When there is one hunter or less, there is no non-zero equilibrium that is different than the carrying capacity. There is not enough hunting pressure to control the population below the carrying cpacity at this P. 
+
+C. 
+
+If these are the equilibrium equations, I don't understand why 
 
