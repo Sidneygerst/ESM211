@@ -190,7 +190,7 @@ stat_function(fun = function8, color = "red", n = 10000) +
   geom_hline(yintercept = 0) +
   geom_vline(xintercept = 1, linetype = "dotted", color = "purple", size = 2) +
   theme_bw() +
-  ylab("N")
+  ylab("Equilibrium")
 
 function_8_9_plot
 
@@ -199,9 +199,9 @@ function_8_9_plot
 
 B. 
 
-The equilibium is unstable at P = 1. When there is one hunter or less, there is no non-zero equilibrium that is different than the carrying capacity. There is not enough hunting pressure to control the population below the carrying cpacity at this P. 
+The equilibium changes from locally stable to locally unstable at P = 1. When there is less than one hunter the equilibrium is negative.  
 
 C. 
 
-If these are the equilibrium equations, I don't understand why 
+With this graph we can learn what the equilibrium of a population is given the number of hunters. When the number of hunters is greater than 1 there is always a positive equilibrium till about P = 5.5. We saw in question number 6 when P = 6, there is no equilibrium between hunters and the population; the species will be completely taken out. I am still a bit confused about what happens when P = 1 at the negative equilibrium at the top of this chart.  
 
