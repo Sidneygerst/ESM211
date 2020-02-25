@@ -1,8 +1,10 @@
 ---
-title: "Matrix Models Lab"
+title: 'Homework 3: Matrix Models '
 author: "Sidney Gerst"
-date: "February 17, 2020"
-output: html_document
+date: "February 25, 2020"
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,67 +14,282 @@ library(primer)
 library(popbio)
 ```
 
-Script from Online
+#Modeling Sea Turtle Age Structure
 
+
+### 1. Enter the Model
 ```{r}
+#Create the Matrix
 
-#### Script to generate the analysis and figures of the semipalmated
-####  sandpiper matrix population model shown in lecture
-
-## Direct matrix entry
-# Semipalmated sandpiper model
-A <- matrix(data=c(0.02115, 0.074, 0.0846, 0.563, 0, 0, 
-                   0, 0.563, 0.563),
-            nrow=3, ncol=3, byrow=TRUE)
-N <- c(23.5, 14.2, 7.3)
-
-## Population projection
-# Look at one year, using matrix multiplication:
-N1 <- A %*% N
-
-# Set up an array to store 20 years of simulated data
-Nt <- matrix(0,21,3)
-Nt[1,] <- N
-
-# Project the model forward, using a for loop (!)
-for (i in 1:20) {
-  Nt[i+1,] <- A %*% Nt[i,]
-}
-
-# Make some plots
-matplot(0:20, Nt, type='l', xlab="time")
-matplot(0:20, Nt, type='l', xlab="time", log='y',col=1:3, lty=1:3)
-legend("topright", c("1-yr old", "2-yr old", "3+ yr old"), col=1:3, lty=1:3)
-
-# Much the same result can be obtained using pop.projection() and 
-#   stage.vector.plot() in the popbio package
-
-# Look at population growth rate from generation 19 to 20, and 20 to 21
-# Notice that it is the same for all three stages, and the same in the two years
-Nt[20,]/Nt[19,]
-Nt[21,]/Nt[20,]
-
-# Now look at growth rates from the entire time series. Notice how, in early
-# years, it is quite variable both between years and between stages
-Nt[2:21,]/Nt[1:20,]
-
-
-
-## Calculate the asymptotic growth rate and stable age distribution
-# Eigenanalysis
-eigen(A)
-lambda <- eigen(A)$values[1]
-# This produces complex numbers - to get rid of the zero imaginary 
-#  part, use the Re() function:
-lambda <- Re(eigen(A)$values[1])
-
-# Stable age distribution:
-SAD <- Re(eigen(A)$vectors[,1])/sum(Re(eigen(A)$vectors[,1]))
-
-# The same results can be caluated using the lambda() and stable.stage()
-#   functions in the popbio package
+class_names <- c("Egg", "Sm Juv", "Lg Juv", "Subadult", "Adult")
+A <- matrix(c(0, 0, 0, 4.665, 61.896,
+              0.675, 0.703, 0, 0, 0,
+              0, 0.047, 0.657, 0, 0,
+              0, 0, 0.019, 0.682, 0,
+              0, 0, 0, 0.061, 0.809),
+            nrow = 5, ncol = 5, byrow = TRUE, dimnames = list(class_names, class_names))
 
 
 
 ```
+
+1.1. Print the matrix you have just created, and ensure that it matches the one in Table 2 of Crowder et al.(1994) 
+
+```{r}
+
+####1.1
+
+A
+
+```
+
+1.2. Print out the subsets of A described in the list above. Do you get the values you expect? Do youcunderstand how matrix subsetting works? If not, what don’t you understand?
+
+```{r}
+
+###1.2
+
+A[4,3]
+A[3:4, 3]
+A[,3] #just column
+A[4,] #just row
+A[, c(3,5)] #columns 3 and 5
+A[-1,] #everything except row 1
+
+```
+
+I understand how subsetting works. The left side of the bracket represents rows and the right side represents columns. Putting a (-) before a number takes away that row. 
+
+1.3. From the matrix you have just created, draw the life cycle graph, putting in the values for each transition. This can be hand-drawn.
+
+*See Attachment*
+
+
+### 2. Projecting the Population Matrix
+
+```{r}
+
+n_0 <- c(1000, 10, 10, 10, 10) # Initial abundance
+#pop projection
+n_1 <- A %*% n_0
+A %*% n_1
+
+#do it in a function
+pop <- pop.projection(A, n_0, iterations = 10) # Project the matrix
+pop
+
+
+#Plotting routine
+stage.vector.plot(pop$stage.vector) # Plot each stage through time
+
+###2.1
+#if we are interested in abundances
+stage.vector.plot(pop$stage.vector, proportions = FALSE)
+
+
+```
+
+2.1. The output of pop.projection has a number of other elements besides stage.vector. Look at all of the elements of pop and make sure that you understand them (referring to the help page if needed).
+
+```{r}
+
+#do it in a function
+pop <- pop.projection(A, n_0, iterations = 10) # Project the matrix
+pop
+
+
+```
+
+
+2.2. Plot pop$pop.sizes and pop$pop.changes through time. What do these tell you?
+
+```{r}
+
+###2.2
+#pop.sizes
+plot(pop$pop.sizes)
+
+#pop.changes
+plot(pop$pop.changes)
+
+
+```
+
+Pop sizes shows the population size through all life stages. 
+
+Pop changes shows how the total population changes through time. 
+
+
+
+
+2.3. Once the population has reached the stable stage distribution (SSD), all stages will grow or decline exponentially with the same growth rate. Looking at the stage vector plot, has this been acheived by the end of your simulated time series? (Tip: this might be easier to determine if you make the plot with abundance on a log scale. You can do this by including log = "y" in the call to stage.vector.plot)
+
+```{r}
+
+###2.3
+stage.vector.plot(pop$stage.vector, proportions = FALSE, log = "y")
+
+
+
+```
+
+The population is not stable by year 10, the lines are not at the same slope.
+
+
+
+2.4. If the population has not reached the SSD, run the simulation for longer. How many years are required before the population appears to be at the SSD?
+
+```{r}
+
+#do it longer
+pop_20 <- pop.projection(A, n_0, iterations = 20) # Project the matrix
+stage.vector.plot(pop_20$stage.vector, proportions = FALSE, log = "y")
+
+pop_30 <- pop.projection(A, n_0, iterations = 30) # Project the matrix
+stage.vector.plot(pop_30$stage.vector, proportions = FALSE, log = "y")
+
+#
+#if you haven't run the model long enough, the labels are misleading
+#these values can be calculated through the eigan value and eigan value analysis
+
+
+```
+
+All seem to be declining at the same rate starting at 15 years and becoming stable. 
+
+
+### 3. Analyzing Population Matrix
+
+3.1. Compare the values of lambda and SSD with the equivalent outputs of pop.projection from the initial run (with only 10 years of simulation). Why are they different?
+
+
+```{r}
+#Where the population becomes stable
+lambda(A)
+stable.stage(A)
+
+
+```
+
+Lambda is different than the SSD because it is the stable slope for the entire length of age and all stages are stable, while the SSD is the slope stable slope per age stage. 
+
+
+3.2. You want to improve the status of the population so that it is no longer declining. You think that your best options are to manage the nesting beaches to increase egg/hatchling survival (e.g., controlling poaching, motorized vehicles, dogs, bright lights that disorient hatchlings) or to reduce the bycatch of adult turtles in shrimp trawling nets (e.g., by requiring a modified design with a “turtle excluder device” or by reducing fishing effort). Use the model to evaluate the effects of these two strategies:
+
+a. Which element of the projection matrix represents egg/hatchling survival? Which represents adult survival?
+
+The egg element is in the first column, second row [1,2]. The adult element is in the fifth column, fifth row [5,5]. 
+
+
+b. Increase egg/hatchling survival in the model, and re-calculate λ1. By how much does it increase? Experiment with different values of this survival term until you get an asymptotic growth rate of 1 or more. How large does egg survival need to be to achieve this?
+
+```{r}
+
+#Want the Lambda to be one for all egg survival
+class_names <- c("Egg", "Sm Juv", "Lg Juv", "Subadult", "Adult")
+A_1 <- matrix(c(0, 0, 0, 4.665, 61.896,
+              1.5, 0.703, 0, 0, 0,
+              0, 0.047, 0.657, 0, 0,
+              0, 0, 0.019, 0.682, 0,
+              0, 0, 0, 0.061, 0.809),
+            nrow = 5, ncol = 5, byrow = TRUE, dimnames = list(class_names, class_names))
+
+pop_egg <- pop.projection(A_1, n_0, iterations = 10)
+
+lambda(A_1)
+#impossible to save the eggs rates
+
+
+```
+
+
+The egg element has to be greater than 1 in order for λ to be one. More specifically, it has to be 1.5. At this rate it is not possible to save the population by saving eggs. 
+
+
+c. Put the egg survival back to its original value, increase adult survival in the model, and re-calculate λ1. By how much does it increase? Experiment with different values of this survival term until you get an asymptotic growth rate of 1 or more. How large does adult survival need to be to achieve this?
+
+```{r}
+
+#Want the Lambda for the adults
+A_2 <- matrix(c(0, 0, 0, 4.665, 61.896,
+              0.675, 0.703, 0, 0, 0,
+              0, 0.047, 0.657, 0, 0,
+              0, 0, 0.019, 0.682, 0,
+              0, 0, 0, 0.061, 0.924),
+            nrow = 5, ncol = 5, byrow = TRUE, dimnames = list(class_names, class_names))
+pop_adult <- pop.projection(A_2, n_0, iterations = 10)
+
+lambda(A_2)
+#Have to save the adults
+
+
+```
+
+The adult only needs to be 0.924 to have a λ greater than 1. 
+
+d. Based on this analysis, which life stage seems the more promising one to target managment at? What else would you need to know to reach a final conclusion?
+
+Adults are more promising to target managment. A sensitivity anaylsis should be performed to reach a final conclusion. 
+
+
+
+### 4.  Sensitivity and elasticity analysis in R
+
+```{r}
+
+class_names <- c("Egg", "Sm Juv", "Lg Juv", "Subadult", "Adult")
+A <- matrix(c(0, 0, 0, 4.665, 61.896,
+              0.675, 0.703, 0, 0, 0,
+              0, 0.047, 0.657, 0, 0,
+              0, 0, 0.019, 0.682, 0,
+              0, 0, 0, 0.061, 0.809),
+            nrow = 5, ncol = 5, byrow = TRUE, dimnames = list(class_names, class_names))
+
+
+DemoInfo(A)
+
+# 0.3287410397 slope of lambda at A5,5 (Sij)
+# 0.08165216 slope of lambda at A1,2
+
+```
+
+4.1. Referring to the help page and section 2.2 of the Stevens chapter, make sure you understand what each of the outpurs of DemoInfo represents. The “RV” (reproductive value) (another kind of eigenvector) is the only bit we haven’t covered in lecture
+
+```{r}
+
+Demo <- DemoInfo(A)
+Demo
+
+# 0.3287410397 slope of lambda at A5,5 (Sij)
+# 0.08165216 slope of lambda at A1,2
+
+
+```
+
+
+4.2. Looking at the sensitivity and elasticity matrices, what can you conlude about which matrix elements would likely have the biggest impact on λ if they were changed?
+
+```{r}
+####Sensitivity and Elasticities
+
+Demo$Sensitivities
+
+Demo$Elasticities
+
+
+```
+
+
+The sensitvity element that is the most influential on λ is [4,3], while [5,2] is larger, it is not a transition that the turtle undergoes. 
+
+The elasticity element that is the most influential on λ is [5,5]
+
+4.3. Compare the elasticity matrix with Fig. 1 in Crowder et al. (1994). Do you understand where the values in the figure come from?
+
+The values from Figure 1 come from three different elasticities of the probability of suriving and remaining in the life stage, the probability of surviving and going to the next stage, and reproductive output. 
+
+4.4. Look at the sensitivity matrix produced by DemoInfo. What does the sensitivity for element a5,1 represent? Does it make sense to have a non-zero value here? Why or why not?
+
+[5,1] represents the transition between eggs to adults. This transition cannot exist, so a non-zero answer does not make sense because you would expect to see a zero. 
+
 
